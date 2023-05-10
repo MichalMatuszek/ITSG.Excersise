@@ -25,7 +25,7 @@ namespace ITSG.Excersise.Infrastructure.Domain
             using var connection = _connectionFactory.CreateConnection();
 
             var existingResource = await connection.QueryFirstOrDefaultAsync<Resource>(
-                "SELECT * FROM [Resources] WHERE Id = @Id", new { Id = id });
+                "SELECT * FROM [Resources] WHERE Id = @Id AND [IsDeleted] = 0", new { Id = id });
 
             if (existingResource == null)
                 return LockResult.NotFound;
@@ -80,7 +80,7 @@ namespace ITSG.Excersise.Infrastructure.Domain
             var connection = _connectionFactory.CreateConnection();
 
             var existingResource = await connection.QueryFirstOrDefaultAsync<Resource>(
-                "SELECT * FROM [Resources] WHERE Id = @Id", new { Id = id });
+                "SELECT * FROM [Resources] WHERE Id = @Id AND [IsDeleted] = 0", new { Id = id });
 
             if (existingResource == null)
                 return LockResult.NotFound;

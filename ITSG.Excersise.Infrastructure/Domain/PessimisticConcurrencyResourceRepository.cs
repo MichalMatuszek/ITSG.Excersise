@@ -27,7 +27,7 @@ namespace ITSG.Excersise.Infrastructure.Domain
             using(var trans = connection.BeginTransaction())
             {
                 var resource = await connection.QueryFirstOrDefaultAsync<Resource>(
-                    "SELECT * FROM [Resources] WITH (XLOCK) WHERE Id = @Id", new { Id = id }, trans);
+                    "SELECT * FROM [Resources] WITH (XLOCK) WHERE Id = @Id AND [IsDeleted] = 0", new { Id = id }, trans);
 
 
                 if (resource == null)
@@ -80,7 +80,7 @@ namespace ITSG.Excersise.Infrastructure.Domain
             using (var trans = connection.BeginTransaction())
             {
                 var resource = await connection.QueryFirstOrDefaultAsync<Resource>(
-                    "SELECT * FROM [Resources] WITH (XLOCK) WHERE Id = @Id", new { Id = id }, trans);
+                    "SELECT * FROM [Resources] WITH (XLOCK) WHERE Id = @Id AND [IsDeleted] = 0", new { Id = id }, trans);
 
 
                 if (resource == null)
